@@ -1,0 +1,67 @@
+需用#include <algorithm>
+sort 对给定区间所有元素进行排序
+stable_sort
+对给定区间所有元素进行稳定排序
+partial_sort 
+对给定区间所有元素部分排序
+partial_sort_copy 
+对给定区间复制并排序
+nth_element 找出给定区间的某个位置对应的元素
+is_sorted 
+判断一个区间是否已经排好序
+partition
+使得符合某个条件的元素放在前面
+stable_partition
+相对稳定的使得符合某个条件的元素放在前面
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+ int a[20]={2,4,1,23,5,76,0,43,24,65},i;
+ for(i=0;i<20;i++)
+  cout<<a[i]<<endl;
+ sort(a,a+20);
+ for(i=0;i<20;i++)
+ cout<<a[i]<<endl;
+ return 0;
+}
+输出结果将是把数组a按升序排序
+
+bool compare(int a,int b)
+{
+      return a<b;   //升序排列，如果改为return a>b，则为降序
+}
+int _tmain(int argc, _TCHAR* argv[])
+{
+     int a[20]={2,4,1,23,5,76,0,43,24,65},i;
+     for(i=0;i<20;i++)
+       cout<<a[i]<<endl;
+     sort(a,a+20,compare);
+     for(i=0;i<20;i++)
+       cout<<a[i]<<endl;
+     return 0;
+}
+
+qsort():
+原型:
+_CRTIMP void __cdecl qsort (void*, size_t, size_t,int (*)(const void*, const void*));
+
+解释:    qsort ( 数组名 ，元素个数，元素占用的空间(sizeof)，比较函数) 
+比较函数是一个自己写的函数  遵循 int com(const void *a,const void *b) 的格式。
+当a b关系为 >  <  = 时，分别返回正值 负值 零 （或者相反）。
+使用a b 时要强制转换类型，从void * 转换回应有的类型后，进行操作。 
+数组下标从零开始,个数为N, 下标0-(n-1)。
+实例：
+int compare(const void *a,const void *b)
+{
+     return *(int*)b-*(int*)a;   
+}
+int main()
+{
+     int a[20]={2,4,1,23,5,76,0,43,24,65},i;
+     for(i=0;i<20;i++)
+        cout<<a[i]<<endl;
+     qsort((void *)a,20,sizeof(int),compare);
+     for(i=0;i<20;i++)
+        cout<<a[i]<<endl;
+     return 0;
+}
